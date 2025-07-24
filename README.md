@@ -15,8 +15,8 @@ CinemaConnect is a modern web application that provides a seamless movie ticket 
 
 ## Tech Stack
 
-### Frontend\section{Proposed Work}
-Proposed Work
+### Proposed Work
+
 User Authentication: Secure login and registration system using JWT to protect user sessions and manage access control.
 
 Movie Browsing and Search: Users can explore movies by genre, language, and city with real-time filtering and showtime listings.
@@ -30,7 +30,7 @@ Email and QR Ticket Generation: Automatic email confirmation with PDF ticket and
 Admin Dashboard: Admins can manage movies, showtimes, halls, and monitor booking statistics.
 
 My Bookings and Rentals: Users can view past bookings and rented movies through a personalized dashboard.
-
+### Frontend
 - React 18
 - TypeScript
 - React Router DOM
