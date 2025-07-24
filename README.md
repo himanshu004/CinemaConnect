@@ -16,17 +16,20 @@ CinemaConnect is a modern web application that provides a seamless movie ticket 
 ## Tech Stack
 
 ### Frontend\section{Proposed Work}
-\begin{frame}{Proposed Work}
-\begin{itemize}
-    \item \textbf{User Authentication:} Secure login and registration system using JWT to protect user sessions and manage access control.
-    \item \textbf{Movie Browsing and Search:} Users can explore movies by genre, language, and city with real-time filtering and showtime listings.
-    \item \textbf{Seat Selection and Booking:} Interactive seat maps enable users to choose and reserve seats dynamically with real-time updates.
-    \item \textbf{Payment Integration:} Razorpay (test mode) integration allows users to make secure online payments.
-    \item \textbf{Email and QR Ticket Generation:} Automatic email confirmation with PDF ticket and QR code for validation.
-    \item \textbf{Admin Dashboard:} Admins can manage movies, showtimes, halls, and monitor booking statistics.
-    \item \textbf{My Bookings and Rentals:} Users can view past bookings and rented movies through a personalized dashboard.
-\end{itemize}
-\end{frame}
+Proposed Work
+User Authentication: Secure login and registration system using JWT to protect user sessions and manage access control.
+
+Movie Browsing and Search: Users can explore movies by genre, language, and city with real-time filtering and showtime listings.
+
+Seat Selection and Booking: Interactive seat maps enable users to choose and reserve seats dynamically with real-time updates.
+
+Payment Integration: Razorpay (test mode) integration allows users to make secure online payments.
+
+Email and QR Ticket Generation: Automatic email confirmation with PDF ticket and QR code for validation.
+
+Admin Dashboard: Admins can manage movies, showtimes, halls, and monitor booking statistics.
+
+My Bookings and Rentals: Users can view past bookings and rented movies through a personalized dashboard.
 
 - React 18
 - TypeScript
