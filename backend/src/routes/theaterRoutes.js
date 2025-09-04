@@ -1,5 +1,5 @@
 import express from 'express';
-import Theater from '../models/theater.js';
+import Theater from '../models/Theater.js';
 
 const router = express.Router();
 
