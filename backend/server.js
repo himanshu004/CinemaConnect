@@ -4,7 +4,7 @@ import dotenv from 'dotenv';
 import axios from 'axios';
 import mongoose from 'mongoose';
 import { createServer } from 'http';
-import { Theater } from './src/models/Theater.js';
+import  Theater  from './src/models/Theater.js';
 import { Screen } from './src/models/Screen.js';
 import { initializeSocket } from './src/socket/seatManager.js';
 
