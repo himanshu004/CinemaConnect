@@ -13,7 +13,6 @@ dotenv.config();
 
 const app = express();
 const server = createServer(app);
-const PORT = process.env.PORT || 5000;
 
 // Initialize Socket.IO
 const io = initializeSocket(server);
@@ -333,6 +332,5 @@ app.get('/api/movies', async (req, res) => {
 });
 
 // Start server
-server.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
-}); 
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
