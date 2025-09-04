@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+import Theater from '../models/theater.js';
 
 const seatSchema = new mongoose.Schema({
   id: {
