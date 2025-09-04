@@ -266,7 +266,7 @@ app.get('/api/movies', async (req, res) => {
           language: 'en-US',
           page: 1
         },
-        timeout: 10000, // 10 second timeout
+        timeout: 100000, // 10 second timeout
         headers: {
           'Accept': 'application/json',
           'Content-Type': 'application/json'
