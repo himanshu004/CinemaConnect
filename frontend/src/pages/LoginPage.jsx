@@ -72,6 +72,7 @@ const LoginPage = ({ setIsAuthenticated }) => {
           <form onSubmit={handleSubmit}>
             <div className="form-group">
               <label htmlFor="email">Email</label>
+              <label htmlFor="email">Email</label>
               <input
                 type="email"
                 id="email"
@@ -80,8 +81,10 @@ const LoginPage = ({ setIsAuthenticated }) => {
                 onChange={handleChange}
                 required
                 placeholder="Enter your email"
+                autoComplete="email"    
                 disabled={loading}
               />
+
             </div>
             <div className="form-group">
               <label htmlFor="password">Password</label>
@@ -93,6 +96,7 @@ const LoginPage = ({ setIsAuthenticated }) => {
                 onChange={handleChange}
                 required
                 placeholder="Enter your password"
+                autoComplete="password"    
                 disabled={loading}
               />
             </div>
