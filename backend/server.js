@@ -7,6 +7,8 @@ import { createServer } from 'http';
 import  Theater  from './src/models/Theater.js';
 import { Screen } from './src/models/Screen.js';
 import { initializeSocket } from './src/socket/seatManager.js';
+import Hall from './src/models/Hall.js';
+
 
 // Load environment variables
 dotenv.config();
