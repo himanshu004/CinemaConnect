@@ -257,14 +257,14 @@ app.use((err, req, res, next) => {
 });
 
 // Start server
-const server = app.listen(PORT, '127.0.0.1', () => {
-  console.log(`Server is running on http://127.0.0.1:${PORT}`);
+const server = app.listen(PORT, '0.0.0.0', () => {
+  console.log(`Server is running on port ${PORT}`);
 }).on('error', (err) => {
   console.error('Server failed to start:', err);
   process.exit(1);
 });
 
-// Add graceful shutdown
+// Graceful shutdown
 process.on('SIGTERM', () => {
   console.info('SIGTERM signal received.');
   server.close(() => {
