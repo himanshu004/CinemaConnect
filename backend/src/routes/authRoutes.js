@@ -72,7 +72,10 @@ router.post('/reset-password-otp', resetPasswordWithOtp);
 router.post('/reset-password', resetPassword);
 
 // Login route
-router.post('/login', login);
+router.post('/login', (req, res) => {
+  console.log('Login route hit via authRoutes');
+  login(req, res);
+});
 
 // Signup route
 router.post('/signup', signup);

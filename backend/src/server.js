@@ -26,8 +26,16 @@ dotenv.config();
 console.log('Environment variables loaded:', {
   TMDB_API_KEY: process.env.TMDB_API_KEY,
   PORT: process.env.PORT,
-  MONGODB_URI: process.env.MONGODB_URI
+  MONGODB_URI: process.env.MONGODB_URI,
+  JWT_SECRET: process.env.JWT_SECRET ? '✅ Set' : '❌ Missing'
 });
+
+// Validate required environment variables
+if (!process.env.JWT_SECRET) {
+  console.error('❌ JWT_SECRET environment variable is not set!');
+  console.log('Please set JWT_SECRET in your Render environment variables');
+  process.exit(1);
+}
 
 const app = express();
 
@@ -45,12 +53,19 @@ app.use(cors({
 app.use(express.json());
 
 // MongoDB Connection
-mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/cinemaconnect', {
+const mongoUri = process.env.MONGODB_URI;
+if (!mongoUri) {
+  console.error('❌ MONGODB_URI environment variable is not set!');
+  console.log('Please set MONGODB_URI in your Render environment variables');
+  process.exit(1);
+}
+
+mongoose.connect(mongoUri, {
   useNewUrlParser: true,
   useUnifiedTopology: true
 })
   .then(() => {
-    console.log('MongoDB connected successfully');
+    console.log('✅ MongoDB connected successfully');
     const db = mongoose.connection;
     console.log('Database name:', db.name);
     console.log('Database state:', db.readyState);
@@ -66,17 +81,21 @@ mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/cinemacon
     });
   })
   .catch(err => {
-    console.error('MongoDB connection error:', err);
+    console.error('❌ MongoDB connection error:', err);
+    console.log('Please check your MONGODB_URI in Render environment variables');
     process.exit(1);
   });
 
 // Routes
+console.log('Setting up routes...');
 app.use('/api/auth', authRoutes);
+console.log('Auth routes loaded');
 app.use('/api/theaters', theaterRoutes);
 app.use('/api/movies', movieRoutes);
 app.use('/api/bookings', bookingRoutes);
 app.use('/api/payment', paymentRoutes);
 app.use('/api/wallet', walletRoutes);
+console.log('All routes loaded');
 
 // Test route
 app.get('/api/test', (req, res) => {
@@ -195,6 +214,22 @@ app.use((err, req, res, next) => {
 });
 
 // Global error handler
+// Catch-all route for debugging
+app.use('*', (req, res) => {
+  console.log('Unhandled route:', req.method, req.originalUrl);
+  res.status(404).json({ 
+    message: 'Route not found',
+    method: req.method,
+    url: req.originalUrl,
+    availableRoutes: [
+      'GET /',
+      'GET /api/test',
+      'POST /api/auth/login',
+      'POST /api/auth/signup'
+    ]
+  });
+});
+
 // Error handling middleware
 app.use((err, req, res, next) => {
   console.error('Unhandled error:', err);
