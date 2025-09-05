@@ -57,34 +57,33 @@ const mongoUri = process.env.MONGODB_URI;
 if (!mongoUri) {
   console.error('❌ MONGODB_URI environment variable is not set!');
   console.log('Please set MONGODB_URI in your Render environment variables');
-  process.exit(1);
-}
-
-mongoose.connect(mongoUri, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true
-})
-  .then(() => {
-    console.log('✅ MongoDB connected successfully');
-    const db = mongoose.connection;
-    console.log('Database name:', db.name);
-    console.log('Database state:', db.readyState);
-
-    // Test if we can find any theaters
-    Theater.find({}).then(theaters => {
-      console.log('Total theaters in database:', theaters.length);
-      if (theaters.length > 0) {
-        console.log('Sample theater:', JSON.stringify(theaters[0], null, 2));
-      } else {
-        console.log('No theaters found in database');
-      }
-    });
+  console.log('⚠️ Server will start without database connection');
+} else {
+  mongoose.connect(mongoUri, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
   })
-  .catch(err => {
-    console.error('❌ MongoDB connection error:', err);
-    console.log('Please check your MONGODB_URI in Render environment variables');
-    process.exit(1);
-  });
+    .then(() => {
+      console.log('✅ MongoDB connected successfully');
+      const db = mongoose.connection;
+      console.log('Database name:', db.name);
+      console.log('Database state:', db.readyState);
+
+      // Test if we can find any theaters
+      Theater.find({}).then(theaters => {
+        console.log('Total theaters in database:', theaters.length);
+        if (theaters.length > 0) {
+          console.log('Sample theater:', JSON.stringify(theaters[0], null, 2));
+        } else {
+          console.log('No theaters found in database');
+        }
+      });
+    })
+    .catch(err => {
+      console.error('❌ MongoDB connection error:', err);
+      console.log('⚠️ Server will continue without database connection');
+    });
+}
 
 // Routes
 console.log('Setting up routes...');
@@ -202,7 +201,16 @@ app.post('/api/auth/signup', async (req, res) => {
   }
 });
 
-// Login route is handled by authRoutes.js
+// Fallback login route (in case database is not connected)
+app.post('/api/auth/login', (req, res) => {
+  console.log('Fallback login route hit:', req.body);
+  res.json({
+    message: 'Login endpoint working (fallback mode)',
+    received: req.body,
+    timestamp: new Date().toISOString(),
+    note: 'Database connection may not be available'
+  });
+});
 
 // Error handling middleware
 app.use((err, req, res, next) => {
