@@ -92,7 +92,8 @@ RAZORPAY_KEY_SECRET=your_razorpay_key_secret
 
 ### Frontend (.env)
 ```
-REACT_APP_API_URL=http://localhost:5000
+REACT_APP_API_URL=https://cinemaconnect-backend.onrender.com
+
 REACT_APP_RAZORPAY_KEY_ID=your_razorpay_key_id
 ```
 
@@ -112,7 +113,8 @@ npm start
 
 The application will be available at:
 - Frontend: http://localhost:3000
-- Backend API: http://localhost:5000
+- Backend API:https://cinemaconnect-backend.onrender.com
+
 
 ## Development Scripts
 
