@@ -297,7 +297,7 @@ export const searchMovies = async (query, language = 'en-US') => {
 // Theater API calls
 export const getTheaters = async () => {
   try {
-    const response = await axios.get('http://localhost:5000/api/theaters');
+    const response = await axios.get('https://cinemaconnect-backend.onrender.com/api/theaters');
     return response.data;
   } catch (error) {
     console.error('Error fetching theaters:', error);
@@ -307,7 +307,7 @@ export const getTheaters = async () => {
 
 export const getTheatersByCity = async (city) => {
   try {
-    const response = await axios.get(`http://localhost:5000/api/theaters/city/${city}`);
+    const response = await axios.get(`https://cinemaconnect-backend.onrender.com/api/theaters/city/${city}`);
     return response.data;
   } catch (error) {
     console.error(`Error fetching theaters for city ${city}:`, error);
@@ -317,7 +317,7 @@ export const getTheatersByCity = async (city) => {
 
 export const getTheaterById = async (id) => {
   try {
-    const response = await axios.get(`http://localhost:5000/api/theaters/${id}`);
+    const response = await axios.get(`https://cinemaconnect-backend.onrender.com/api/theaters/${id}`);
     return response.data;
   } catch (error) {
     console.error(`Error fetching theater with id ${id}:`, error);

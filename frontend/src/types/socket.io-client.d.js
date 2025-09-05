@@ -2,7 +2,7 @@
 import { io } from "socket.io-client";
 
 // connect to your backend
-const socket = io("http://localhost:5000", {
+const socket = io("https://cinemaconnect-backend.onrender.com", {
   transports: ["websocket"], // ensures websocket is used
 });
 

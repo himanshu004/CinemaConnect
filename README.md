@@ -81,7 +81,7 @@ npm install
 
 ### Backend (.env)
 ```
-PORT=5000
+PORT=4000
 MONGODB_URI=your_mongodb_uri
 JWT_SECRET=your_jwt_secret
 EMAIL_USER=your_email

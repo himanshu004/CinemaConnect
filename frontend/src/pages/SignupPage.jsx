@@ -38,7 +38,7 @@ const SignupPage = ({ setIsAuthenticated }) => {
     setShowOtp(false);
     
     try {
-      const response = await fetch('http://localhost:5000/api/auth/signup', {
+      const response = await fetch('https://cinemaconnect-backend.onrender.com/api/auth/signup', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -79,7 +79,7 @@ const SignupPage = ({ setIsAuthenticated }) => {
     setOtpError(null);
     setOtpLoading(true);
     try {
-      const response = await fetch('http://localhost:5000/api/auth/verify-signup-otp', {
+      const response = await fetch('https://cinemaconnect-backend.onrender.com/api/auth/verify-signup-otp', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

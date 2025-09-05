@@ -24,7 +24,7 @@ const MyBookingsPage = () => {
 
       console.log('Fetching bookings with token:', token.substring(0, 10) + '...');
 
-      const response = await fetch('http://localhost:5000/api/bookings/my-bookings', {
+      const response = await fetch('https://cinemaconnect-backend.onrender.com/api/bookings/my-bookings', {
         headers: {
           'Authorization': `Bearer ${token}`,
           'Content-Type': 'application/json'
