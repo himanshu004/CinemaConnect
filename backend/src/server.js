@@ -80,7 +80,12 @@ app.use('/api/wallet', walletRoutes);
 
 // Test route
 app.get('/api/test', (req, res) => {
-  res.json({ message: 'Server is running' });
+  console.log('Test endpoint hit:', new Date().toISOString());
+  res.json({ 
+    message: 'Server is running',
+    timestamp: new Date().toISOString(),
+    port: process.env.PORT || 4000
+  });
 });
 
 // Root route
@@ -255,10 +260,9 @@ app.use((err, req, res, next) => {
 
 // Start server
 const PORT = process.env.PORT || 4000;
-app.listen(PORT, '0.0.0.0', () => {
+const server = app.listen(PORT, '0.0.0.0', () => {
   console.log(`🚀 Server running on port ${PORT}`);
 });
-
 
 // Graceful shutdown
 process.on('SIGTERM', () => {
