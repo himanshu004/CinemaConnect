@@ -22,7 +22,7 @@ const __dirname = dirname(__filename);
 console.log('Current working directory:', process.cwd());
 console.log('__dirname:', __dirname);
 
-dotenv.config({ path: join(__dirname, '../.env') });
+dotenv.config();
 console.log('Environment variables loaded:', {
   TMDB_API_KEY: process.env.TMDB_API_KEY,
   PORT: process.env.PORT,
@@ -30,7 +30,6 @@ console.log('Environment variables loaded:', {
 });
 
 const app = express();
-const PORT = process.env.PORT || 4000;
 
 // CORS configuration
 app.use(cors({
@@ -248,21 +247,18 @@ app.use((err, req, res, next) => {
 });
 
 // Global error handler
+// Error handling middleware
 app.use((err, req, res, next) => {
   console.error('Unhandled error:', err);
-  res.status(500).json({
-    message: 'Something went wrong!',
-    error: process.env.NODE_ENV === 'development' ? err.message : 'Internal server error'
-  });
+  res.status(500).json({ message: 'Internal server error' });
 });
 
 // Start server
-const server = app.listen(PORT, '0.0.0.0', () => {
-  console.log(`Server is running on port ${PORT}`);
-}).on('error', (err) => {
-  console.error('Server failed to start:', err);
-  process.exit(1);
+const PORT = process.env.PORT || 4000;
+app.listen(PORT, '0.0.0.0', () => {
+  console.log(`🚀 Server running on port ${PORT}`);
 });
+
 
 // Graceful shutdown
 process.on('SIGTERM', () => {

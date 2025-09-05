@@ -332,6 +332,10 @@ app.get('/api/movies', async (req, res) => {
 });
 
 // Start server
-app.listen(process.env.PORT || 4000, '0.0.0.0', () => {
-  console.log(`Server running on port ${process.env.PORT || 4000}`);
+// Start server (use server, not app!)
+const PORT = process.env.PORT || 4000;
+
+server.listen(PORT, '0.0.0.0', () => {
+  console.log(`🚀 Server running on port ${PORT}`);
 });
+
