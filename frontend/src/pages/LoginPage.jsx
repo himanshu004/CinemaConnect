@@ -25,7 +25,7 @@ const LoginPage = ({ setIsAuthenticated }) => {
     setLoading(true);
 
     try {
-      const response = await fetch('https://cinemaconnect-backend.onrender.com/api/auth/login', {
+      const response = await fetch('https://cinemaconnect.onrender.com/api/auth/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
