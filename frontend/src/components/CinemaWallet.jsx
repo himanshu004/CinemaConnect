@@ -20,7 +20,7 @@ const CinemaWallet = ({ userId }) => {
   const fetchWalletDetails = async () => {
     try {
       const token = localStorage.getItem('token');
-      const response = await fetch('https://cinemaconnect-backend.onrender.com/api/wallet/details', {
+      const response = await fetch('https://cinemaconnect.onrender.com/api/wallet/details', {
         headers: {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${token}`
@@ -53,7 +53,7 @@ const CinemaWallet = ({ userId }) => {
 
     try {
       const token = localStorage.getItem('token');
-      const response = await fetch('https://cinemaconnect-backend.onrender.com/api/wallet/add', {
+      const response = await fetch('https://cinemaconnect.onrender.com/api/wallet/add', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -78,7 +78,7 @@ const CinemaWallet = ({ userId }) => {
           handler: async function (response) {
             try {
               // Verify payment with backend
-              const verifyResponse = await fetch('https://cinemaconnect-backend.onrender.com/api/wallet/verify', {
+              const verifyResponse = await fetch('https://cinemaconnect.onrender.com/api/wallet/verify', {
                 method: 'POST',
                 headers: {
                   'Content-Type': 'application/json',

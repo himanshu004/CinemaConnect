@@ -65,7 +65,7 @@ const BookingPage = () => {
     setLoading(true);
     setError(null);
     try {
-      const response = await fetch(`https://cinemaconnect-backend.onrender.com/api/theaters/city/${selectedCity}`);
+      const response = await fetch(`https://cinemaconnect.onrender.com/api/theaters/city/${selectedCity}`);
       if (!response.ok) {
         if (response.status === 404) {
           setTheaters([]);

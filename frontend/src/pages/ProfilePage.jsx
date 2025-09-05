@@ -43,7 +43,7 @@ const ProfilePage = () => {
 
     try {
       const token = localStorage.getItem('token');
-      const response = await fetch('https://cinemaconnect-backend.onrender.com/api/user/profile', {
+      const response = await fetch('https://cinemaconnect.onrender.com/api/user/profile', {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',

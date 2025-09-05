@@ -62,7 +62,7 @@ const PaymentPage = () => {
     setLoading(true);
     setError(null);
     try {
-      const response = await fetch('https://cinemaconnect-backend.onrender.com/api/wallet/pay', {
+      const response = await fetch('https://cinemaconnect.onrender.com/api/wallet/pay', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -129,7 +129,7 @@ const PaymentPage = () => {
         seats: state.selectedSeats,
       };
 
-      const order = await fetch('https://cinemaconnect-backend.onrender.com/api/payment/create-order', {
+      const order = await fetch('https://cinemaconnect.onrender.com/api/payment/create-order', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(orderData),
@@ -202,7 +202,7 @@ const PaymentPage = () => {
               ...(token ? { 'Authorization': `Bearer ${token}` } : {})
             };
 
-            const verifyRes = await fetch('https://cinemaconnect-backend.onrender.com/api/payment/verify', {
+            const verifyRes = await fetch('https://cinemaconnect.onrender.com/api/payment/verify', {
               method: 'POST',
               headers,
               body: JSON.stringify(verificationPayload),

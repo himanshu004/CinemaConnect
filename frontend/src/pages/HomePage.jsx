@@ -25,7 +25,7 @@ const HomePage = ({ searchQuery, activeSection }) => {
     try {
       setLoading(true);
       setError(null);
-      let url = 'https://cinemaconnect-backend.onrender.com/api/movies';
+      let url = 'https://cinemaconnect.onrender.com/api/movies';
 
       const params = new URLSearchParams();
       if (activeSection) params.append('section', activeSection);
@@ -69,7 +69,7 @@ const HomePage = ({ searchQuery, activeSection }) => {
       document.body.appendChild(script);
       await new Promise(resolve => { script.onload = resolve; });
 
-      const response = await fetch('https://cinemaconnect-backend.onrender.com/api/payment/create-order', {
+      const response = await fetch('https://cinemaconnect.onrender.com/api/payment/create-order', {
         method: 'POST',
         headers: { 
           'Content-Type': 'application/json',
@@ -112,7 +112,7 @@ const HomePage = ({ searchQuery, activeSection }) => {
               rentalDetails
             };
 
-            const verifyRes = await fetch('https://cinemaconnect-backend.onrender.com/api/payment/verify-rental', {
+            const verifyRes = await fetch('https://cinemaconnect.onrender.com/api/payment/verify-rental', {
               method: 'POST',
               headers: { 
                 'Content-Type': 'application/json',

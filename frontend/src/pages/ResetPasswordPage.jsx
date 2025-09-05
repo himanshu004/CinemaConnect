@@ -28,7 +28,7 @@ const ResetPasswordPage = () => {
 
     setLoading(true);
     try {
-      const response = await fetch('https://cinemaconnect-backend.onrender.com/api/auth/reset-password', {
+      const response = await fetch('https://cinemaconnect.onrender.com/api/auth/reset-password', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ token: code, password })

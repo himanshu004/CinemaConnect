@@ -4,7 +4,7 @@ import { io } from 'socket.io-client';
 import '../styles/SeatSelectionPage.css';
 
 const RAZORPAY_KEY = 'rzp_test_pZ7rJCEC6C1nZd';
-const SOCKET_URL = process.env.REACT_APP_SOCKET_URL || 'https://cinemaconnect-backend.onrender.com';
+const SOCKET_URL = process.env.REACT_APP_SOCKET_URL || 'https://cinemaconnect.onrender.com';
 
 const SeatSelectionPage = () => {
   const location = useLocation();
@@ -115,7 +115,7 @@ const SeatSelectionPage = () => {
         setError('Razorpay SDK failed to load');
         return;
       }
-      const response = await fetch('https://cinemaconnect-backend.onrender.com/api/payment/create-order', {
+      const response = await fetch('https://cinemaconnect.onrender.com/api/payment/create-order', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ amount: 199 * 100 }),
@@ -131,7 +131,7 @@ const SeatSelectionPage = () => {
         order_id: order.id,
         handler: async function (response) {
           try {
-            const verificationResponse = await fetch('https://cinemaconnect-backend.onrender.com/api/payment/verify-rental', {
+            const verificationResponse = await fetch('https://cinemaconnect.onrender.com/api/payment/verify-rental', {
               method: 'POST',
               headers: { 'Content-Type': 'application/json' },
               body: JSON.stringify({
@@ -197,7 +197,7 @@ const SeatSelectionPage = () => {
         setError('Razorpay SDK failed to load');
         return;
       }
-      const response = await fetch('https://cinemaconnect-backend.onrender.com/api/payment/create-order', {
+      const response = await fetch('https://cinemaconnect.onrender.com/api/payment/create-order', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ amount: totalAmount * 100 }),
@@ -213,7 +213,7 @@ const SeatSelectionPage = () => {
         order_id: order.id,
         handler: async function (response) {
           try {
-            const verificationResponse = await fetch('https://cinemaconnect-backend.onrender.com/api/payment/verify', {
+            const verificationResponse = await fetch('https://cinemaconnect.onrender.com/api/payment/verify', {
               method: 'POST',
               headers: { 'Content-Type': 'application/json' },
               body: JSON.stringify({
@@ -261,7 +261,7 @@ const SeatSelectionPage = () => {
             if (data.success || data.status === 'success' || (data && typeof data === 'object' && Object.keys(data).length > 0)) {
               try {
                 const token = localStorage.getItem('token');
-                const bookingResponse = await fetch('https://cinemaconnect-backend.onrender.com/api/bookings', {
+                const bookingResponse = await fetch('https://cinemaconnect.onrender.com/api/bookings', {
                   method: 'POST',
                   headers: {
                     'Content-Type': 'application/json',
