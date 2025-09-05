@@ -4,17 +4,20 @@ import jwt from 'jsonwebtoken';
 
 const login = async (req, res) => {
   try {
+    console.log('Login request received:', { email: req.body.email });
     const { email, password } = req.body;
 
     // Check if user exists
     const user = await User.findOne({ email });
     if (!user) {
+      console.log('User not found:', email);
       return res.status(400).json({ message: 'Invalid credentials' });
     }
 
     // Check password
-    const isMatch = await bcrypt.compare(password, user.password);
+    const isMatch = await user.comparePassword(password);
     if (!isMatch) {
+      console.log('Invalid password for user:', email);
       return res.status(400).json({ message: 'Invalid credentials' });
     }
 
@@ -30,10 +33,17 @@ const login = async (req, res) => {
       _id: user._id,
       name: user.name,
       email: user.email,
+      phone: user.phone,
+      address: user.address,
+      city: user.city,
+      state: user.state,
+      zipCode: user.zipCode,
       role: user.role
     };
 
+    console.log('Login successful for:', email);
     res.json({
+      message: 'Login successful',
       token,
       user: userData
     });

@@ -183,64 +183,7 @@ app.post('/api/auth/signup', async (req, res) => {
   }
 });
 
-// Login route with detailed logging
-app.post('/api/auth/login', async (req, res) => {
-  console.log('Received login request:', {
-    body: req.body,
-    headers: req.headers
-  });
-
-  try {
-    const { email, password } = req.body;
-
-    if (!email || !password) {
-      console.log('Missing credentials');
-      return res.status(400).json({ message: 'Email and password are required' });
-    }
-
-    const user = await User.findOne({ email });
-    if (!user) {
-      console.log('User not found:', email);
-      return res.status(401).json({ message: 'Invalid credentials' });
-    }
-
-    const isMatch = await user.comparePassword(password);
-    if (!isMatch) {
-      console.log('Invalid password for user:', email);
-      return res.status(401).json({ message: 'Invalid credentials' });
-    }
-
-    const token = jwt.sign(
-      { userId: user._id },
-      process.env.JWT_SECRET,
-      { expiresIn: '24h' }
-    );
-
-    const userData = {
-      _id: user._id,
-      name: user.name,
-      email: user.email,
-      phone: user.phone,
-      address: user.address,
-      city: user.city,
-      state: user.state,
-      zipCode: user.zipCode
-    };
-
-    console.log('Login successful for:', email);
-    res.status(200).json({
-      message: 'Login successful',
-      token,
-      user: userData
-    });
-  } catch (error) {
-    console.error('Login error:', error);
-    res.status(500).json({
-      message: 'Internal server error',
-      error: error.message
-    });
-  }
-});
+// Login route is handled by authRoutes.js
 
 // Error handling middleware
 app.use((err, req, res, next) => {
