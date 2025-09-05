@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Test Netlify to Render Connection</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .test-section { margin: 20px 0; padding: 15px; border: 1px solid #ddd; }
+        .success { color: green; }
+        .error { color: red; }
+        button { padding: 10px 20px; margin: 5px; }
+    </style>
+</head>
+<body>
+    <h1>Test Netlify to Render Connection</h1>
+    
+    <div class="test-section">
+        <h3>1. Test Backend Root Endpoint</h3>
+        <button onclick="testRoot()">Test Root</button>
+        <div id="root-result"></div>
+    </div>
+    
+    <div class="test-section">
+        <h3>2. Test Backend Login Endpoint</h3>
+        <button onclick="testLogin()">Test Login</button>
+        <div id="login-result"></div>
+    </div>
+    
+    <div class="test-section">
+        <h3>3. Test CORS from Netlify Domain</h3>
+        <button onclick="testCORS()">Test CORS</button>
+        <div id="cors-result"></div>
+    </div>
+
+    <script>
+        async function testRoot() {
+            const resultDiv = document.getElementById('root-result');
+            resultDiv.innerHTML = 'Testing...';
+            
+            try {
+                const response = await fetch('https://cinemaconnect.onrender.com/');
+                const data = await response.json();
+                resultDiv.innerHTML = `<div class="success">✅ Root endpoint working: ${JSON.stringify(data)}</div>`;
+            } catch (error) {
+                resultDiv.innerHTML = `<div class="error">❌ Root endpoint error: ${error.message}</div>`;
+            }
+        }
+        
+        async function testLogin() {
+            const resultDiv = document.getElementById('login-result');
+            resultDiv.innerHTML = 'Testing...';
+            
+            try {
+                const response = await fetch('https://cinemaconnect.onrender.com/api/auth/login', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        email: 'test@example.com',
+                        password: 'test123'
+                    })
+                });
+                
+                const data = await response.json();
+                resultDiv.innerHTML = `<div class="success">✅ Login endpoint working: ${JSON.stringify(data)}</div>`;
+            } catch (error) {
+                resultDiv.innerHTML = `<div class="error">❌ Login endpoint error: ${error.message}</div>`;
+            }
+        }
+        
+        async function testCORS() {
+            const resultDiv = document.getElementById('cors-result');
+            resultDiv.innerHTML = 'Testing...';
+            
+            try {
+                const response = await fetch('https://cinemaconnect.onrender.com/api/test', {
+                    method: 'GET',
+                    headers: {
+                        'Origin': window.location.origin
+                    }
+                });
+                
+                const data = await response.json();
+                const corsHeader = response.headers.get('access-control-allow-origin');
+                resultDiv.innerHTML = `<div class="success">✅ CORS working: Origin=${window.location.origin}, CORS Header=${corsHeader}</div>`;
+            } catch (error) {
+                resultDiv.innerHTML = `<div class="error">❌ CORS error: ${error.message}</div>`;
+            }
+        }
+    </script>
+</body>
+</html>
